@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Pusher from 'pusher-js';
+//import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const API_URL_SENSORES = 'http://localhost:3010/sensores';
@@ -118,39 +120,44 @@ class App extends Component {
     }
     
     return (
-    
-      
-      <div className="todo-wrapper">
+     <div className="todo-wrapper">
         <form>
+
           <h4>Sensores</h4>
-        <ul>
           {items1.map(item=>( 
-            <li key={item._id}>
-              {item.tipo} {item.subtipo} {item.medicion}              
-            </li>
+            <ul class="list-group list-group-flush">
+              <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
+                {item.tipo} {item.subtipo}  <span class="badge badge-info badge-pill">{item.medicion}</span> 
+              </li>
+            </ul>
           ))}
-        </ul>
-            <h4>Configuracion Deseada</h4>
-            <ul>
+          <h4>Configuracion Deseada</h4>
+          
           {items2.map(item=>( 
-            <li key={item._id}>
-              {item.identificador} {item.descripcion} {item.valor}              
+          <ul class="list-group list-group-flush">
+          <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
+            {item.identificador} {item.descripcion} <span class="badge badge-light badge-pill"> {item.valor} </span>          
             </li>
+            </ul>
           ))}
-        </ul>
-        <h4>Status Actuadores</h4>
-            <ul>
+         <h4>Status Actuadores</h4>
           {items3.map(item=>( 
-            <li key={item._id}>
-              {item.tipo} {item.subtipo} {item.operacion}              
-            </li>
+            <ul class="list-group list-group-flush"> 
+              <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
+                  {item.tipo} {item.subtipo} <span class="badge badge-success badge-pill"> {item.operacion} </span>             
+              </li>
+            </ul>
           ))}
-        </ul>
-
-
+       
+     
+        
         </form>
         
+
+       
+        
       </div>
+         
     );
   }
 }
