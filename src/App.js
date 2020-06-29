@@ -136,7 +136,11 @@ class App extends Component {
           {items2.map(item=>( 
           <ul class="list-group list-group-flush">
           <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
-            {item.identificador} {item.descripcion} <span class="badge badge-light badge-pill"> {item.valor} </span>          
+            {item.identificador} {item.descripcion} <a href="http://www.google.com" class="badge badge-light"> {item.valor} </a>          
+            <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked={item.habilitado}/>
+            <label class="custom-control-label" for="customSwitch1"></label>
+            </div>
             </li>
             </ul>
           ))}
