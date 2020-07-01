@@ -12,6 +12,11 @@ body {
   min-height: 100vh;
   position: relative;
 }
+input:invalid+span:after {
+  content: '✖';
+  padding-left: 5px;
+}
+
 
 .todo-wrapper {
   width: 400px;

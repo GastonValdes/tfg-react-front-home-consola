@@ -22,6 +22,19 @@ class App extends Component {
     this.addTask = this.addTask.bind(this);
   }
 
+//-----------------------------
+
+handleChange = (event) => {
+  this.setState({[event.target.name]: event.target.value});
+
+// alert ('antes de setear: ' + event.target.name + ' ' + event.target.value);
+}
+//---------------------------------
+
+
+
+
+
   addTask(newTask) {
 //Cargo valores de sensores
     fetch(API_URL_SENSORES)
@@ -120,37 +133,40 @@ class App extends Component {
     }
     
     return (
+      
      <div className="todo-wrapper">
+      
         <form>
-
+        
+        <img src={require('./img/header2.jpg')} alt="imagen Encabezado" with="200" height="100" />
+         
           <h4>Sensores</h4>
           {items1.map(item=>( 
-            <ul class="list-group list-group-flush">
-              <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
-                {item.tipo} {item.subtipo}  <span class="badge badge-info badge-pill">{item.medicion}</span> 
+              <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
+                {item.tipo} {item.subtipo}  <span className="badge badge-info badge-pill">{item.medicion}</span> 
               </li>
-            </ul>
+           
           ))}
           <h4>Configuracion Deseada</h4>
-          
           {items2.map(item=>( 
-          <ul class="list-group list-group-flush">
-          <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
-            {item.identificador} {item.descripcion} <a href="http://www.google.com" class="badge badge-light"> {item.valor} </a>          
-            <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked={item.habilitado}/>
-            <label class="custom-control-label" for="customSwitch1"></label>
-            </div>
-            </li>
-            </ul>
+           <ul className="list-group list-group-flush">
+          <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center"> {item.identificador} {item.descripcion} 
+                  <label htmlForm="medicion"></label>
+                  <input name="medicion" type="number" min = "10" max = "5000" placeholder={item.valor} onChange={this.handleChange}
+                  />
+                  <span class="validity"></span>
+                    <div className="custom-control custom-switch">
+                      <input type="checkbox" className="custom-control-input" id="customSwitch1" defaultChecked={item.habilitado} onChange={this.handleChange}/>
+                      <label className="custom-control-label" htmlFor="customSwitch1"></label>
+                  </div>
+              </li>
+              </ul>
           ))}
          <h4>Status Actuadores</h4>
           {items3.map(item=>( 
-            <ul class="list-group list-group-flush"> 
-              <li  key={item._id} class="list-group-item d-flex justify-content-between align-items-center">
-                  {item.tipo} {item.subtipo} <span class="badge badge-success badge-pill"> {item.operacion} </span>             
+              <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
+                  {item.tipo} {item.subtipo} <span className="badge badge-success badge-pill"> {item.operacion} </span>             
               </li>
-            </ul>
           ))}
        
      
