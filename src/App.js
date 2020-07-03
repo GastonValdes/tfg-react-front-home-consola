@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import Pusher from 'pusher-js';
-//import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const API_URL_SENSORES = 'http://localhost:3010/sensores';
 const API_URL_UMBRALES = 'http://localhost:3010/umbrales';
 const API_URL_ACTUADORES = 'http://localhost:3010/actuadores';
+const API_URL_CALC = 'http://localhost:5000/calculos';
 const PUSHER_APP_KEY = '9456bc135d545fdf5c87';
 const PUSHER_APP_CLUSTER = 'mt1';
 
@@ -24,10 +24,88 @@ class App extends Component {
 
 //-----------------------------
 
-handleChange = (event) => {
-  this.setState({[event.target.name]: event.target.value});
+grabar = (event) => {
 
-// alert ('antes de setear: ' + event.target.name + ' ' + event.target.value);
+/*
+let nam = event.target.name;
+let val = event.target.value;
+if (nam === "user"){
+    this.setState({user: val})
+}
+if (nam === "password"){
+    this.setState({password: val})
+}
+*/
+ const type_temp = this.state.items2.find((item1)=> item1.descripcion === "Temperatura" );
+ const type_ilum = this.state.items2.find((item2)=> item2.descripcion === "Iluminacion" );
+ 
+type_temp.valor = this.state.Temperatura;
+console.log(type_temp.valor);
+
+type_ilum.valor = this.state.Iluminacion;
+console.log(type_ilum.valor);
+
+/***************************************************************************************** */
+ //aca va el fetch al registro de temp
+ alert (type_temp.valor);
+ fetch(API_URL_UMBRALES, {
+  method: 'PATCH', //Hago un Patch para actualizar el umbral de temperatura
+  headers : { 
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+            },
+            body: JSON.stringify(
+                        { "id" : type_temp._id,
+                          "descripcion" : type_temp.descripcion,
+                          "habilitado" : type_temp.habilitado,
+                          "identificador" : type_temp.identificador,
+                          "token" : type_temp.token,
+                          "valor" : type_temp.valor
+                          })               
+}
+      ).then(function(response) {
+                              
+                              console.log(response);
+                              return response.json();
+                                }
+              );
+//aca va el fetch al registro de ilum
+alert (type_ilum.valor);
+fetch(API_URL_UMBRALES, {
+ method: 'PATCH', //Hago un Patch para actualizar el umbral de temperatura
+ headers : { 
+   'Content-Type': 'application/json',
+   'Accept': 'application/json'
+           },
+           body: JSON.stringify(
+                       { "id" : type_ilum._id,
+                         "descripcion" : type_ilum.descripcion,
+                         "habilitado" : type_ilum.habilitado,
+                         "identificador" : type_ilum.identificador,
+                         "token" : type_ilum.token,
+                         "valor" : type_ilum.valor
+                         })               
+}
+     ).then(function(response) {
+                             
+                             console.log(response);
+                             return response.json();
+                               }
+             );
+
+//Inicio Llamada a Api Logica
+fetch(API_URL_CALC, {
+  method: 'GET', //Hago un Post para crear un nuevo registro
+      headers: {
+        'Content-Type': 'application/json'
+      },
+     
+        }).then(function(response) {
+        
+        console.log(response)
+        return response.json();
+      });
+
 }
 //---------------------------------
 
@@ -122,7 +200,11 @@ handleChange = (event) => {
 
   }
   
-   
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+
+  //  alert ('actualizo')
+  }
   render() {
   
    
@@ -149,19 +231,19 @@ handleChange = (event) => {
           ))}
           <h4>Configuracion Deseada</h4>
           {items2.map(item=>( 
-           <ul className="list-group list-group-flush">
-          <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center"> {item.identificador} {item.descripcion} 
-                  <label htmlForm="medicion"></label>
-                  <input name="medicion" type="number" min = "10" max = "5000" placeholder={item.valor} onChange={this.handleChange}
-                  />
-                  <span class="validity"></span>
+
+          <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center"> {item.descripcion} 
+                  <label htmlform={item.descripcion}></label>
+                  <input name={item.descripcion} type="number" min = "10" max = "5000" placeholder={item.valor} onChange={this.handleChange}/>
+                  <span className="validity"></span>
                     <div className="custom-control custom-switch">
-                      <input type="checkbox" className="custom-control-input" id="customSwitch1" defaultChecked={item.habilitado} onChange={this.handleChange}/>
-                      <label className="custom-control-label" htmlFor="customSwitch1"></label>
+                      <input type="checkbox" className="custom-control-input" id={item._id} defaultChecked={item.habilitado}/>
+                      <label className="custom-control-label" htmlFor={item._id}></label>
                   </div>
               </li>
-              </ul>
+
           ))}
+          <button type="button" className="btn btn-primary" onClick={this.grabar}>Grabar</button>
          <h4>Status Actuadores</h4>
           {items3.map(item=>( 
               <li  key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
