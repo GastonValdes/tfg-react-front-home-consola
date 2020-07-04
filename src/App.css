@@ -103,3 +103,7 @@ li {
     line-height: 0.5em;
 }
 
+.imagenHeader{
+  display: flex;
+  justify-content: center;
+}

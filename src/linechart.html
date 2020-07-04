@@ -1,0 +1,83 @@
+  <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Hora', 'Config', 'Sensor Temp int', 'Sensor Temp Ext', 'Calefaccion'],
+          ['9:00',  24,      24,   22,    +2],
+          ['10:00',  24,      24,   23,    +1],
+          ['11:00',  24,      24,   24,    0],
+          ['12:00',  24,      24,   25,    -1],
+          ['13:00',  24,      24,   28,    -4],
+          ['14:00',  24,      24,   30,    -6],
+          ['15:00',  24,      24,   33,    -9],
+          ['16:00',  24,      24,   32,    -8],
+          ['17:00',  24,      24,   31,    -7],
+          ['18:00',  24,      24,   30,    -6],
+          ['19:00',  24,      24,   27,    -3],
+          ['20:00',  24,      24,   26,    -2],
+          ['21:00',  24,      24,   22,    +2],
+          ['22:00',  24,      24,   21,    +3]
+        ]);
+
+        var options = {
+          title: 'Temperatura',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Hora', 'Config', 'Sensor Luz int', 'Sensor Luz Ext', 'Iluminacion', 'Persiana'],
+      ['9:00',  2000,      2000,    2400,    0,         100],
+      ['10:00',  2000,      2000,   2400,    0,         100],
+      ['11:00',  2000,      2000,   2400,    0,         100],
+      ['12:00',  2000,      2000,   2500,    0,        100],
+      ['13:00',  2000,      2000,   2500,    0,        100],
+      ['14:00',  2000,      2000,   2500,    0,        100],
+      ['15:00',  2000,      2000,   2500,    0,        100],
+      ['16:00',  2000,      2000,   2300,    0,        100],
+      ['17:00',  2000,      2000,   2000,    0,         100],
+      ['18:00',  2000,      2000,   1700,    +300,      100],
+      ['19:00',  2000,      2000,   1300,    +700,      100],
+      ['20:00',  2000,      2000,   800,    +1200,      100],
+      ['21:00',  2000,      2000,   400,    +2000,      0],
+      ['22:00',  1000,      1000,   400,    +2000,      0],
+      ['23:00',  0,            0,   400,    +2000,      0],
+      ['24:00',  0,            0,   400,    +2000,      0]
+    ]);
+
+    var options = {
+      title: 'Iluminación',
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 50%; height: 50%"></div>
+    <div id="curve_chart2" style="width: 50%; height: 50%"></div>
+  </body>
+</html>
