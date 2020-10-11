@@ -1,33 +1,25 @@
-# stage1 as builder
-FROM node:current-alpine as builder
+FROM node:current-alpine
+COPY package*.json ./
 
-# copy the package.json to install dependencies
-COPY package.json package-lock.json ./
+# Bundle app source
+COPY . ./
+RUN npm install 
 
-# Install the dependencies and make the folder
-RUN npm install && mkdir /react-ui && mv ./node_modules ./react-ui
+RUN adduser -D -S user1
 
-WORKDIR /react-ui
+# RUN mkdir -p ./node_modules && chown -R node:node /home/node/app
 
-COPY . .
-
-# Build the project and copy the files
-RUN npm run build
+# Install app dependencies
 
 
-FROM nginx:mainline-alpine
 
-#!/bin/sh
 
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+#RUN npm install
 
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy from the stahg 1
-COPY --from=builder /react-ui/build /usr/share/nginx/html
-COPY --from=builder /react-ui/build /var/www
+# COPY --chown=node:node . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+USER user1
+
+CMD [ "npm" , "start" ]
