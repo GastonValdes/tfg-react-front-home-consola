@@ -7,7 +7,7 @@ class ReactSelect extends Component {
     super(props);
     this.state = {
       chartDataLight: {
-        labels: ['1', '3', '5','7','9','13','15','17','19','21','23'],
+        labels: ['1', '3', '5','7','9','11','13','15','17','19','21','23'],
         datasets:[{
                   label:'Interior',
                   data: [
@@ -64,13 +64,13 @@ class ReactSelect extends Component {
                           0
                     ],
                     borderColor: '#f50010',
-                    backgroundColor: 'transparent'
+                    backgroundColor: '#f0414c'
                   }
                 ]
       },
 // aca empiezo con el grafico de temperaturas
   chartDataTemp: {
-  labels: ['1', '3', '5','7','9','13','15','17','19','21','23'],
+  labels: ['1', '3', '5','7','9','11','13','15','17','19','21','23'],
   datasets:[{
             label:'Interior',
             data: [
@@ -84,7 +84,7 @@ class ReactSelect extends Component {
                     22,
                     22,
                     22,
-                    22,
+                    24,
                     24          
                   ],
                   borderColor: '#03b3ff',
@@ -108,7 +108,7 @@ class ReactSelect extends Component {
                     20
                     ],
                     borderColor: '#029952',
-                  backgroundColor: '#00f783'
+                  backgroundColor: 'transparent'
             },
             {
               label: 'Regulacion',
@@ -133,7 +133,7 @@ class ReactSelect extends Component {
 },
 
 chartDataPres: {
-  labels: ['1', '3', '5','7','9','13','15','17','19','21','23'],
+  labels: ['1', '3', '5','7','9','11','13','15','17','19','21','23'],
   datasets:[{
             label:'Presencia',
             data: [
