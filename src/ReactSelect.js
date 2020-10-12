@@ -24,7 +24,7 @@ class ReactSelect extends Component {
                           2000,
                           0          
                         ],
-                        borderColor: 'green',
+                        borderColor: '#6f02ab',
                         backgroundColor: 'transparent'
           
                   },
@@ -63,7 +63,7 @@ class ReactSelect extends Component {
                           1700,
                           0
                     ],
-                    borderColor: 'orange',
+                    borderColor: '#f50010',
                     backgroundColor: 'transparent'
                   }
                 ]
@@ -126,8 +126,8 @@ class ReactSelect extends Component {
                 2,
                 4
               ],
-              borderColor: '#f79c00',
-              backgroundColor: '#f7ca00'
+              borderColor: '#f50010',
+              backgroundColor: '#f0414c'
             }
           ]
 },
@@ -189,7 +189,7 @@ chartDataPres: {
                     100,
                     0
               ],
-              borderColor: 'orange',
+              borderColor: '#f50010',
               backgroundColor: 'transparent'
             }
           ]
